@@ -1,46 +1,56 @@
-# Getting Started with Create React App
+# Humans — User Directory App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+> Тестовое задание · Позиция Senior Front-End Engineer
 
-## Available Scripts
+React-приложение для просмотра и поиска по списку пользователей с упором на производительность и чистую архитектуру.
 
-In the project directory, you can run:
+---
 
-### `npm start`
+## Запуск
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+**Требования:** Node.js ≥ 16, npm ≥ 8
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+```bash
+npm install
+npm start
+```
 
-### `npm test`
+Откройте [http://localhost:3000](http://localhost:3000) в браузере.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+---
 
-### `npm run build`
+## Функциональность
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+- **Живой поиск с автодополнением** — подсказки появляются по мере ввода; клик по подсказке сразу запускает поиск
+- **Серверная пагинация** — грузится только текущая страница через параметры `limit` / `skip`
+- **Умный пагинатор** — список страниц с многоточием: всегда видны первая, последняя и страницы рядом с текущей
+- **Таблица пользователей** — аватар, имя, почта, возраст, телефон, IP и роль
+- **Error Boundary** — перехватывает ошибки рендера и показывает понятный фолбэк с кнопкой «Попробовать снова»
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+---
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## Оптимизации производительности
 
-### `npm run eject`
+**Debounce (300 мс)** — подсказки запрашиваются только после того, как пользователь перестал печатать.
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+**Кэш в памяти с TTL 60 с** — каждый ответ API сохраняется по ключу `запрос:страница`. Повторный переход на уже открытую страницу отдаётся мгновенно, без сетевого запроса.
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+**Фоновый и hover-prefetch** — следующая страница загружается в фоне сразу после получения текущей. Наведение на кнопку пагинатора тоже запускает prefetch. На практике навигация ощущается мгновенной.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+**AbortController** — каждый fetch отменяется в cleanup-функции эффекта. Быстрая смена страниц не приводит к гонке запросов.
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+**React.memo + useCallback** — `Table`, `Pagination` и `SearchInput` не перерисовываются, если их пропсы не изменились. Обработчики стабилизированы через `useCallback`, чтобы мемоизация реально работала.
 
-## Learn More
+**React.lazy + Suspense** — `Pagination` вынесен в отдельный чанк, что уменьшает размер начального бандла.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+---
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+## Стек
+
+| | |
+|---|---|
+| **React 19** | UI-библиотека |
+| **TypeScript 4.9** | Статическая типизация |
+| **Create React App 5** | Сборка |
+| **dummyjson.com** | Публичный REST API (пользователи, поиск, пагинация) |
+| **Чистый CSS** | Стили без UI-фреймворков |

@@ -1,0 +1,22 @@
+
+
+.table-row {
+    border-bottom: var(--main-border);
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.table-row:hover {
+    background-color: var(--action-color);
+}
+
+.table-cell {
+    padding: 12px 16px;
+    color: #333;
+    text-align: left;
+}
+
+.image-cell {
+    height: 64px;
+    width: 64px;
+}

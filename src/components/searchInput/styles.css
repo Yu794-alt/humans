@@ -1,0 +1,75 @@
+.search-container {
+    background: var(--pramary-color);
+    position: relative;
+    width: 100%;
+    max-width: 500px;
+    margin: 0 auto;
+
+}
+
+.search-input-wrapper {
+    display: flex;
+    justify-content: space-between;
+    border: var(--main-border);
+    border-radius: 8px;
+    transition: border-color 0.2s;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+
+}
+
+.search-input {
+    padding: 10px 16px;
+    font-size: 16px;
+    outline: none;
+    width: 100%;
+}
+
+.search-input-wrapper:focus-within {
+    border-color: var(--action-color);
+}
+
+.search-button {
+    padding: 10px 24px;
+    font-size: 16px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.search-button:hover:not(:disabled) {
+    background-color: var(--action-color);
+}
+
+.suggestions-list {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    margin-top: 4px;
+    padding: 8px 0;
+    background: var(--pramary-color);
+    border: var(--main-border);
+    border-radius: 8px;
+    list-style: none;
+    max-height: 300px;
+    overflow-y: auto;
+    z-index: 1000;
+}
+
+.suggestion-item {
+    display: flex;
+    padding: 8px 16px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.2s;
+}
+
+.suggestion-item-email{
+    font-size: 12px;
+    color: var(--text-secondary-color);
+}
+
+.suggestion-item:hover,
+.suggestion-item.active {
+    background-color: var(--action-color);
+}
