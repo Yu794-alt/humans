@@ -1,0 +1,2 @@
+.pagination{align-items:center;display:flex;flex-wrap:wrap;gap:8px;justify-content:right;padding:16px}.pagination-button{background-color:var(--pramary-color);border:var(--main-border);border-radius:4px;cursor:pointer;height:28px;min-width:28px;padding:0 8px;transition:all .2s}.pagination-button.active,.pagination-button:hover:not(:disabled){background-color:var(--action-color)}.pagination-button.active{border-color:var(--action-color)}.pagination-pages{display:flex;flex-wrap:wrap;gap:4px;justify-content:center}
+/*# sourceMappingURL=439.042a156b.chunk.css.map*/
